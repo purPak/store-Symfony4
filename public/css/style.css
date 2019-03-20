@@ -1,0 +1,9 @@
+/*.card .card-img-top img {
+    max-width: 100%;
+    height: auto;
+}*/
+
+.navigation .pagination {
+    padding-top: 1.5rem;
+    justify-content: center;
+}

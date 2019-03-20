@@ -1,0 +1,5 @@
+app_homepage:
+    path: /
+    controller: App\Controller\HomeController::home
+fos_user_routes:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

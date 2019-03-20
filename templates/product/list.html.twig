@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class="container">
+        <h1>Liste des produits</h1>
+
+        {% include 'partials/loop-products-paginated.html.twig' %}
+
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </main>
+{% endblock %}

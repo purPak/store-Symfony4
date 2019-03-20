@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class="container">
+        <h1>Ajout d'un rôle à un utilisateur</h1>
+
+        <form method="post">
+
+            <div class="form-group">
+                <label for="choosed-user">Utilisateur</label>
+                <select name="choosed-user" id="choosed-user" class="form-control">
+                    {% for user in users %}
+                        <option value="{{ user.id }}">{{ user.username }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="choosed-role">Rôle</label>
+                <select name="choosed-role" id="choosed-role" class="form-control">
+                    <option value="ROLE_ACHETEUR">Acheteur</option>
+                    <option value="ROLE_FOURNISSEUR">Fournisseur</option>
+                    <option value="ROLE_MODERATEUR">Modérateur</option>
+                    <option value="ROLE_ADMIN">Administrateur</option>
+                </select>
+            </div>
+            <input type="submit" value="Changer le rôle" class="btn btn-outline-success">
+        </form>
+    </main>
+
+{% endblock %}

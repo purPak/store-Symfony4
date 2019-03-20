@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class="container">
+        <h1>Bienvenue sur l'accueil</h1>
+
+        <h2>Liste des catégories</h2>
+        <ul class="list-group">
+            {% for category in categories %}
+                {% if category.products.count > 0 %}
+                    <li class="list-group-item list-group-item-action">
+                        <a href="{{ path(
+                            'app_product_listbycategory',
+                            {id: category.id}
+                        ) }}">{{ category.name }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </main>
+{% endblock %}

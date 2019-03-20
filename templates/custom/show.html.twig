@@ -1,0 +1,104 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends base_template %}
+
+{% block title %}
+    {{ "title_show"|trans({'%name%': admin.toString(object)|truncate(15) }, 'SonataAdminBundle') }}
+{% endblock %}
+
+{% block navbar_title %}
+    {{ block('title') }}
+{% endblock %}
+
+{%- block actions -%}
+    {% include '@SonataAdmin/CRUD/action_buttons.html.twig' %}
+{%- endblock -%}
+
+{% block tab_menu %}
+    {{ knp_menu_render(admin.sidemenu(action), {
+        'currentClass' : 'active',
+        'template': get_global_template('tab_menu_template')
+    }, 'twig') }}
+{% endblock %}
+
+{% block show %}
+    <div class="sonata-ba-view">
+
+        {{ sonata_block_render_event('sonata.admin.show.top', { 'admin': admin, 'object': object }) }}
+
+        {% set has_tab = (admin.showtabs|length == 1 and admin.showtabs|keys[0] != 'default') or admin.showtabs|length > 1 %}
+
+        {% if has_tab %}
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs" role="tablist">
+                    {% for name, show_tab in admin.showtabs %}
+                        <li{% if loop.first %} class="active"{% endif %}>
+                            <a href="#tab_{{ admin.uniqid }}_{{ loop.index }}" data-toggle="tab">
+                                <i class="fa fa-exclamation-circle has-errors hide" aria-hidden="true"></i>
+                                {{ show_tab.label|trans({}, show_tab.translation_domain ?: admin.translationDomain) }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <div class="tab-content">
+                    {% for code, show_tab in admin.showtabs %}
+                        <div
+                                class="tab-pane fade{% if loop.first %} in active{% endif %}"
+                                id="tab_{{ admin.uniqid }}_{{ loop.index }}"
+                        >
+                            <div class="box-body  container-fluid">
+                                <div class="sonata-ba-collapsed-fields">
+                                    {% if show_tab.description != false %}
+                                        <p>{{ show_tab.description|raw }}</p>
+                                    {% endif %}
+
+                                    {% set groups = show_tab.groups %}
+                                    {{ block('show_groups') }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% elseif admin.showtabs is iterable %}
+            {% set groups = admin.showtabs.default.groups %}
+            {{ block('show_groups') }}
+        {% endif %}
+
+    </div>
+
+    {{ sonata_block_render_event('sonata.admin.show.bottom', { 'admin': admin, 'object': object }) }}
+{% endblock %}
+
+{% block show_groups %}
+
+    <main class="container">
+        <h1>
+            {{ object.name }}
+            <span class="badge badge-pill badge-info">
+                {{ object.price }}€
+            </span>
+            <span class="badge badge-pill badge-primary">
+                {{ object.category.name }}
+            </span>
+        </h1>
+        <p class="text-muted">Publié le
+            {{ object.createdAt | date('d/m/Y à H:i', "Europe/Paris") }},
+            {{ object.nbViews }} vues
+        </p>
+        <p>{{ object.description }}</p>
+
+        <p class="text-muted">Dernière modification le {{ object.updatedAt | date('d/m/Y H:i', "Europe/Paris") }}</p>
+    </main>
+
+{% endblock %}
