@@ -37,16 +37,16 @@ class User extends FOSParentUser
     }
 
     /**
-     * Place un rôle unique à l'utilisateur (supprimer tous les anciens rôles)
+
      * @param string $userRole
      */
     public function setRole(string $userRole)
     {
-        // Vider les rôles
+        // Drop tous les rôles 
         foreach ($this->getRoles() as $role) {
             $this->removeRole($role);
         }
-        // Ajout le rôle unique passé en paramètre
+        // Ajoute le rôle unique passé en paramètre
         $this->addRole($userRole);
     }
 

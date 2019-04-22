@@ -26,22 +26,20 @@ class AdminController extends Controller
      */
     public function addRole(Request $request): Response
     {
-        // On récupère les variables POSTS
+        // Récupération des variables POST
         $userChoosed = (int) $request->request->get('choosed-user');
         $roleChoosed = $request->request->get('choosed-role');
-        // On récupère le Repository (pour obtenir l'utilisateur voulu et ensuite tous les utilisateurs)
+        // Récupération du  Repository User pour avoir l'user + tous les users)
         $repo = $this->getDoctrine()->getRepository(User::class);
         // On vérifie que les variables POSTS ne sont pas nulles pour modifier en BDD
         if(!is_null($userChoosed) && !is_null($roleChoosed)) {
-            // On récupère l'utilisateur correspondant à l'id passé
+            // récupération de l'User correspondant à l'id passé en paramètre
             $user = $repo->find($userChoosed);
             if(!$user) {
                 throw new \Exception('Utilisateur inconnu');
             }
-            // On assigne le rôle unique à l'utilisateur
+            // On assigne le rôle unique à l'user
             $user->setRole($roleChoosed);
-
-            // On enregistre l'utilisateur en BDD
             $manager = $this->getDoctrine()->getManager();
             $manager->flush();
         }

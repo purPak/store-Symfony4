@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 class HomeController extends Controller
 {
     /**
-     * Page d'accueil : affiche la liste cliquable des catégories
+     * Page d'accueil : affiche la liste des catégories
      * @return Response
      */
     public function home(): Response

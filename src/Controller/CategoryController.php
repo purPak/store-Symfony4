@@ -25,9 +25,9 @@ class CategoryController extends Controller
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             // Si le formulaire est valide :
-            // => on ajoute la catégorie en BDD
+            // => on ajoute la catégorie à la BDD
             $category = $form->getData();
-
+            
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($category);
             $manager->flush();

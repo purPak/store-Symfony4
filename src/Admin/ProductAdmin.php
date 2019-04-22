@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 class ProductAdmin extends AbstractAdmin
 {
     /**
-     * Les champs qui apparaitront dans la liste (tableau)
+     * Configuration des champs à afficher 
      * @param ListMapper $list
      */
     protected function configureListFields(ListMapper $list)
@@ -40,7 +40,7 @@ class ProductAdmin extends AbstractAdmin
     }
 
     /**
-     * Les champs qui apparaitront dans les formulaires (ajout et édition)
+     * 
      * @param FormMapper $form
      */
     protected function configureFormFields(FormMapper $form)

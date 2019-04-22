@@ -11,7 +11,7 @@ use Faker\ORM\Doctrine\Populator;
 
 /**
  * Class AppFixtures
- * NE PAS OUBLIER DE RELANCER LA COMMANDE SUIVANTE APRES CHAQUE CHANGEMENT DU FICHIER
+ * 
  *
  *      php bin/console doctrine:fixtures:load
  *

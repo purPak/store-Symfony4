@@ -49,7 +49,7 @@ class ProductController extends Controller
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             // Si le formulaire est valide :
-            // => on ajoute la catégorie en BDD
+            // => on ajoute la catégorie à la BDD
             $produit = $form->getData();
 
             $manager = $this->getDoctrine()->getManager();
@@ -82,7 +82,7 @@ class ProductController extends Controller
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             // Si le formulaire est valide :
-            // => on ajoute la catégorie en BDD
+            // => on ajoute la catégorie à la BDD
             $produit = $form->getData();
 
             $manager = $this->getDoctrine()->getManager();
