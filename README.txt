@@ -1,6 +1,6 @@
 This App displays ramdom items.
 
-connection à la Db => Doctrine
+Connection to => Doctrine
 Users => FosUser 
 BackOffice => Sonata 
 
